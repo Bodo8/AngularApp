@@ -1,0 +1,90 @@
+
+<h2>
+    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" id="accordionAspect"
+    aria-expanded="false" aria-controls="collapseOne" (click)="hideCreateAspects()"><strong>Show aspects</strong>
+    </button>
+</h2>
+        <form #aspectForm="ngForm" (ngSubmit)="addAspect(aspectForm)">
+            <div class="accordion-body">
+                <div class="card card-body">
+                    <div class="row">
+                        <div class="input-group">
+                            <div class="col-3">
+                                <label for="planetFirst" class="form-label"><strong>Wybierz z
+                                        list..</strong></label>
+                                <select required type="string" class="form-select" aria-label="planetFirst"
+                                    id="planetFirst" [(ngModel)]="planetFirst" name="planetFirst"
+                                    #planetFirstSelect #planetFirstModel="ngModel">
+                                    <option class="" disabled selected value="undefined">Wybierz z listy..
+                                    </option>
+                                    <option *ngFor="let planet of planetNames" [ngValue]="planet">{{ planet }}
+                                    </option>
+                                </select>
+                                <div class="alert alert-danger"
+                                    *ngIf="planetFirstModel.invalid && ( planetFirstModel.touched || planetFirstModel.dirty)">
+                                    <div *ngIf="planetFirstModel.errors.required">
+                                    </div>Pole jest wymagane
+                                </div>
+                                <select required type="string" class="form-select" aria-label="planetSecond"
+                                    id="planetSecond" [(ngModel)]="planetSecond" name="planetSecond"
+                                    #planetSecondSelect #planetSecondModel="ngModel">
+                                    <option class="" disabled selected value="undefined">Wybierz z listy..
+                                    </option>
+                                    <option *ngFor="let planet of planetNames" [ngValue]="planet">{{ planet }}
+                                    </option>
+                                </select>
+                                <div class="alert alert-danger"
+                                    *ngIf="planetSecondModel.invalid && ( planetSecondModel.touched || planetSecondModel.dirty)">
+                                    <div *ngIf="planetSecondModel.errors.required">
+                                    </div>Pole jest wymagane
+                                </div>
+                                <select required type="string" class="form-select" aria-label="aspectName"
+                                    id="aspectName" [(ngModel)]="aspectName" name="aspectName" #aspectNameSelect
+                                    #aspectNameModel="ngModel">
+                                    <option class="" disabled selected value="undefined">Wybierz z listy..
+                                    </option>
+                                    <option *ngFor="let aspect of aspectNames" [ngValue]="aspect">{{ aspect }}
+                                    </option>
+                                </select>
+                                <div class="alert alert-danger"
+                                    *ngIf="aspectNameModel.invalid && ( aspectNameModel.touched || aspectNameModel.dirty)">
+                                    <div *ngIf="aspectNameModel.errors.required">
+                                    </div>Pole jest wymagane
+                                </div>
+                                <select required type="string" class="form-select" aria-label="positiveType"
+                                    id="positiveType" [(ngModel)]="positiveType" name="positiveType"
+                                    #positiveTypeSelect #positiveTypeModel="ngModel">
+                                    <option class="" disabled selected value="undefined">Wybierz z listy..
+                                    </option>
+                                    <option [ngValue]="true">TAK</option>
+                                    <option [ngValue]="false">NIE</option>
+                                </select>
+                                <div class="alert alert-danger"
+                                    *ngIf="positiveTypeModel.invalid && ( positiveTypeModel.touched || positiveTypeModel.dirty)">
+                                    <div *ngIf="positiveTypeModel.errors.required">
+                                    </div>Pole jest wymagane
+                                </div>
+                            </div>
+                            <div class="col-9" id="columnDescription">
+                                <label for="descriptionAspect" class="form-label">Opis aspektu dwu planet
+                                    zodiaku</label>
+                                <textarea required type="string" class="form-control" id="descriptionAspect"
+                                    rows="8" [(ngModel)]="descriptionAspect" name="descriptionAspect"
+                                    #descriptionAspectModel="ngModel"></textarea>
+                                <div class="alert alert-danger"
+                                    *ngIf="descriptionAspectModel.invalid && ( descriptionAspectModel.touched || descriptionAspectModel.dirty)">
+                                    <div *ngIf="descriptionAspectModel.errors.required">
+                                    </div>Pole jest wymagane
+                                </div>
+                            </div>
+                            <button type="button" class="btn btn-default" [disabled]="!aspectForm.dirty"
+                                (click)="aspectForm.resetForm()">Resetuj</button>
+                            <button type="submit" class="btn btn-success"
+                                [disabled]="!aspectForm.form.valid">Dodaj</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+   
+

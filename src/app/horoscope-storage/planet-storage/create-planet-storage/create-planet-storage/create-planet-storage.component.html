@@ -1,0 +1,171 @@
+
+        <h2 class="accordion-header" id="headingOne">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" id="accordionPlanet"
+                 aria-expanded="false" aria-controls="collapseOne" (click)="hideCreatePlanets()">
+                <strong>Planets</strong>
+            </button>
+        </h2>
+            <form #planetForm="ngForm" (ngSubmit)="addPlanet(planetForm)">
+                <div class="accordion-body">
+                    <div class="card card-body">
+                        <div class="row">
+                            <div class="form-group">
+                                <div class="input-group">
+                                    <div class="col-3">
+                                        <label for="planetName" class="form-label"><strong>Wybierz z
+                                                list..</strong></label>
+                                        <select required type="string" [(ngModel)]="planetName" class="form-select"
+                                            id="planetName" name="planetName" #planetNameSelect
+                                            #planetNameModel="ngModel">
+                                            <option class="" disabled selected value="undefined">Wybierz z listy..
+                                            </option>
+                                            <option *ngFor="let planet of planetNames" [ngValue]="planet">{{planet}}
+                                            </option>
+                                        </select>
+                                        <div class="alert alert-danger"
+                                            *ngIf="planetNameModel.invalid && ( planetNameModel.touched || planetNameModel.dirty)">
+                                            <div *ngIf="nameModel.errors.required">Pole jest wymagane</div>
+                                        </div>
+                                        <select required type="string" [(ngModel)]="zodiacName" class="form-select"
+                                            aria-label="zodiacName" id="zodiacName" name="zodiacName"
+                                            #zodiacNameSelect #zodiacNameModel="ngModel">
+                                            <option class="" disabled selected value="undefined">Wybierz z listy..
+                                            </option>
+                                            <option *ngFor="let zodiac of zodiacNames" [ngValue]="zodiac">{{zodiac}}
+                                            </option>
+                                        </select>
+                                        <div class="alert alert-danger"
+                                            *ngIf="zodiacNameModel.invalid && ( zodiacNameModel.touched || zodiacNameModel.dirty)">
+                                            <div *ngIf="zodiacNameModel.errors.required">Pole jest wymagane</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-9" id="columnDescription">
+                                        <label for="descriptionSign" class="form-label"><strong>Opis planety w znaku
+                                                zodiaku</strong></label>
+                                        <textarea required minlength="2" type="text" class="form-control" id="descriptionSign"
+                                            rows="5" [(ngModel)]="descriptionSign" name="descriptionSign"
+                                            #descriptionSignModel="ngModel"></textarea>
+                                        <div class="alert alert-danger"
+                                            *ngIf="descriptionSignModel.invalid && ( descriptionSignModel.touched || descriptionSignModel.dirty)">
+                                            <div *ngIf="descriptionSignModel.errors.required">Pole jest wymagane</div>
+                                            <div *ngIf="descriptionSignModel.errors.minlength">Co najmniej 2 znaki</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-group">
+                                <div class="col-3">
+                                    <select required type="string" class="form-select" aria-label="degreeStart"
+                                        id="degreeStart" [(ngModel)]="degreeStart" name="degreeStart"
+                                        #degreeStartSelect #degreeStartModel="ngModel">
+                                        <option class="" disabled selected value="undefined">z listy..
+                                        </option>
+                                        <option value="1">1</option>
+                                        <option value="10">10</option>
+                                        <option value="20">20</option>
+                                    </select>
+                                    <div class="alert alert-danger"
+                                        *ngIf="degreeStartModel.invalid && ( degreeStartModel.touched || degreeStartModel.dirty)">
+                                        <div *ngIf="degreeStartModel.errors.required">Pole jest wymagane</div>
+                                    </div>
+                                    <select required type="string" class="form-select" aria-label="degreeEnd"
+                                        id="degreeEnd" [(ngModel)]="degreeEnd" name="degreeEnd" #degreeEndSelect
+                                        #degreeEndModel="ngModel">
+                                        <option class="" disabled selected value="undefined">Wybierz z listy..
+                                        </option>
+                                        <option value="10">10</option>
+                                        <option value="20">20</option>
+                                        <option value="30">30</option>
+                                    </select>
+                                    <div class="alert alert-danger"
+                                        *ngIf="degreeEndModel.invalid && ( degreeEndModel.touched || degreeEndModel.dirty)">
+                                        <div *ngIf="degreeEndModel.errors.required">Pole jest wymagane</div>
+                                    </div>
+                                </div>
+                                <div class="col-9" id="columnDescription">
+                                    <label for="descriptionPositionAdd" class="form-label"><strong>Opis położenia
+                                            planety w
+                                            cześci
+                                            zodiaku</strong></label>
+                                    <textarea required minlength="2" type="string" class="form-control"
+                                        id="descriptionPositionAdd" rows="4" [(ngModel)]="descriptionPositionAdd"
+                                        name="descriptionPositionAdd"
+                                        #descriptionPositionModel="ngModel"></textarea>
+                                    <div class="alert alert-danger"
+                                        *ngIf="descriptionPositionModel.invalid && ( descriptionPositionModel.touched || descriptionPositionModel.dirty)">
+                                        <div *ngIf="descriptionPositionModel.errors.required">Pole jest wymagane</div>
+                                        <div *ngIf="descriptionPositionModel.errors.minlength">Co najmniej 2 znaki</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-group">
+                                <div class="col-3">
+                                    <select required type="string" class="form-select" aria-label="numberHouse"
+                                        id="numberHouse" [(ngModel)]="numberHouse" name="numberHouse"
+                                        #numberHouseSelect #numberHouseModel="ngModel">
+                                        <option class="" disabled selected value="undefined">Wybierz z listy..
+                                        </option>
+                                        <option *ngFor="let house of houseNames" [ngValue]="house">{{house}}
+                                        </option>
+                                    </select>
+                                    <div class="alert alert-danger"
+                                        *ngIf="numberHouseModel.invalid && ( numberHouseModel.touched || numberHouseModel.dirty)">
+                                        <div *ngIf="numberHouseModel.errors.required">Pole jest wymagane</div>
+                                    </div>
+                                </div>
+                                <div class="col-9" id="columnDescription">
+                                    <label for="descriptionHous" class="form-label"><strong>Opis planety w domu
+                                            zodiaku</strong></label>
+                                    <textarea required minlength="2" type="string" class="form-control" id="descriptionHous"
+                                        rows="4" [(ngModel)]="descriptionHous" name="descriptionHous"
+                                        #descriptionHousModel="ngModel"></textarea>
+                                    <div class="alert alert-danger"
+                                        *ngIf="descriptionHousModel.invalid && ( descriptionHousModel.touched || descriptionHousModel.dirty)">
+                                        <div *ngIf="descriptionHousModel.errors.required">Pole jest wymagane</div>
+                                        <div *ngIf="descriptionHousModel.errors.minlength">Co najmniej 2 znaki</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="input-group">
+                                <div class="col-3">
+                                    <label for="exactDegree" class="form-label"><strong>Dokładny stopień
+                                            znaku</strong></label>
+                                    <input class="form-control form-control-sm" required type="number"
+                                        placeholder="Liczba..." id="exactDegree" [(ngModel)]="exactDegree"
+                                        name="exactDegree" #exactDegreeModel="ngModel">
+                                    <div class="alert alert-danger"
+                                        *ngIf="exactDegreeModel.invalid && ( exactDegreeModel.touched || exactDegreeModel.dirty)">
+                                        <div *ngIf="exactDegreeModel.errors.required">Pole jest wymagane</div>
+                                    </div>
+                                </div>
+                                <div class="col-9" id="columnDescription">
+                                    <label for="exactDescription" class="form-label"><strong>Dokładny stopień
+                                            opis</strong></label>
+                                    <textarea required minlength="2" type="string" class="form-control" id="exactDescription"
+                                        rows="2" [(ngModel)]="exactDescription" name="exactDescription"
+                                        #exactDescriptionModel="ngModel">
+                                        </textarea>
+                                    <div class="alert alert-danger"
+                                        *ngIf="exactDescriptionModel.invalid && ( exactDescriptionModel.touched || exactDescriptionModel.dirty)">
+                                        <div *ngIf="exactDescriptionModel.errors.required">Pole jest wymagane</div>
+                                        <div *ngIf="exactDescriptionModel.errors.minlength">Co najmniej 2 znaki</div>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <button type="button" class="btn btn-default" [disabled]="!planetForm.dirty"
+                    (click)="planetForm.resetForm()">Resetuj</button>
+                <button type="submit" class="btn btn-success" [disabled]="!planetForm.form.valid">Dodaj</button>
+            </form>
+    

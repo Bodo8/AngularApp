@@ -1,0 +1,48 @@
+<div class="center" style="margin-top: 10%;">
+    <div class="card mx-auto" style="width: 40rem;">
+        <h3 class="card-header">Login</h3>
+        <div class="card-body">
+            <ul class="list-group list-group-flush">
+                <form #loginForm="ngForm" (ngSubmit)="onSubmit()">
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email</label>
+                        <div class="input-group">
+                            <input required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" type="text" name="email"
+                                [(ngModel)]="email" class="form-control" id="email" #emailModel="ngModel" />
+                            <div class="alert alert-danger"
+                                *ngIf="emailModel.invalid && ( emailModel.touched || emailModel.dirty)">
+                                <div *ngIf="emailModel.errors?.required">Pole jest wymagane</div>
+                                <div *ngIf="emailModel.errors?.pattern">Invalid email format</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mb-3">
+                        <label for="password" class="form-label">Password</label>
+                        <div class="input-group">
+                            <input required pattern=".{6,}" type="password" class="form-control" name="password"
+                                [(ngModel)]="password" class="form-control" id="password" #passwordModel="ngModel" />
+                            <div class="alert alert-danger"
+                                *ngIf="passwordModel.invalid && ( passwordModel.touched || passwordModel.dirty)">
+                                <div *ngIf="passwordModel.errors?.required">Pole jest wymagane</div>
+                                <div *ngIf="passwordModel.errors?.pattern">Password must be at least 6 characters long
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col">
+                            <button [disabled]="loading" class="btn btn-primary">
+                                <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                                Login
+                            </button>
+                            <a routerLink="../register" class="btn btn-link">Register</a>
+                        </div>
+                        <div class="form-group col text-right">
+                            <a routerLink="../forgot-password" class="btn btn-link pr-0">Forgot Password?</a>
+                        </div>
+                    </div>
+                </form>
+            </ul>
+        </div>
+    </div>
+</div>

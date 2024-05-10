@@ -1,0 +1,95 @@
+@import "~bootstrap/dist/css/bootstrap.css";
+@import '~bootstrap/dist/css/bootstrap.css';
+@import '~@angular/material/prebuilt-themes/indigo-pink.css';
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+a { cursor: pointer; }
+
+.app-container {
+    min-height: 320px;
+}
+
+.admin-nav {
+    padding-top: 0;
+    padding-bottom: 0;
+    background-color: #e8e9ea;
+    border-bottom: 1px solid #ccc;
+}
+
+.titleSite {
+    padding-top: 3%;
+    background-color: #F0FFFF;
+}
+
+.btn-delete-account {
+    width: 40px;
+    text-align: center;
+    box-sizing: content-box;
+}
+
+#accordionPlanet {
+    background-color: #8FBC8F;
+    height: 55px;
+    font-size: 25px;
+}
+#accordionAspect {
+    background-color: #FFF8DC;
+    height: 55px;
+    font-size: 25px;
+}
+#accordionShowAspect {
+    background-color: #ffd9b3;
+    height: 55px;
+    font-size: 25px;
+}
+#accordionListPlanets {
+    background-color:#ffcccc;
+    height: 55px;
+    font-size: 25px;
+}
+
+.accordion-button {
+    color: black;
+}
+
+#columnDescription {
+    padding-left: 12px;
+}
+
+.form-row {
+    padding: 10px 15px;
+}
+
+.form-select { margin-top: 12px;
+  font-size: 12px; }
+.titleSite { margin-bottom: 40px;}
+
+*{
+    box-sizing: border-box
+} 
+
+#block {
+    display: block;
+    width: 100%;
+    border: none;;
+    padding: 14px 28px;
+    font-size: 16px;
+    text-align: left;
+    color:#e8e9ea;
+  }
+
+  .nav-item-secondary {
+    background-color: #000000;
+    color: white;
+  }
+
+  #navbarmain {
+    background-color: #2d312d;
+  }
+
+  .center{
+ text-align:center;
+ display:block;
+ }

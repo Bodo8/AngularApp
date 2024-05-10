@@ -1,0 +1,101 @@
+<div class="container-fluid">
+    <div class="card mx-auto" style="width: 50rem;">
+        <h3 class="card-header">Register</h3>
+        <div class="card-body">
+            <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+                <div class="form-row">
+                    <div class="form-group col-2">
+                        <label for="title">Title</label>
+                        <select formControlName="title" class="form-control" id="title">
+                            <option value=""></option>
+                            <option value="Mr">Mr</option>
+                            <option value="Mrs">Mrs</option>
+                            <option value="Miss">Miss</option>
+                            <option value="Ms">Ms</option>
+                        </select>
+                        <div class="alert alert-danger"
+                        *ngIf="f['title'].invalid && (f['title'].dirty || f['title'].touched)">
+                            <div *ngIf="f['title'].errors?.['required']">Title is required</div>
+                        </div>
+                    </div>
+                    <div class="form-group col-5">
+                        <label for="firstName">First Name</label>
+                        <input type="text" class="form-control" id="firstName" formControlName="firstName" required/>
+                        <div class="alert alert-danger"
+                            *ngIf="f['firstName'].invalid && (f['firstName'].dirty || f['firstName'].touched)">
+                            <div *ngIf="f['firstName'].errors?.['required']">First name is required</div>
+                            <div *ngIf="f['firstName'].errors?.['minlength']">First name should have at least
+                                3 characters</div>
+                            <div *ngIf="f['firstName'].errors?.['maxlength']">First name should have at most
+                                40 characters</div>
+                        </div>
+                    </div>
+                    <div class="form-group col-5">
+                        <label>Last Name</label>
+                        <input type="text" class="form-control" id="lastName" formControlName="lastName" />
+                        <div class="alert alert-danger"
+                        *ngIf="f['lastName'].invalid && (f['lastName'].dirty || f['lastName'].touched)">
+                        <div *ngIf="f['lastName'].errors?.['required']">First name is required</div>
+                        <div *ngIf="f['lastName'].errors?.['minlength']">First name should have at least
+                            3 characters</div>
+                        <div *ngIf="f['lastName'].errors?.['maxlength']">First name should have at most
+                            40 characters</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group  col-5">
+                    <label for="email">Email</label>
+                    <input type="text" class="form-control" id="email" formControlName="email" />
+                    <div class="alert alert-danger"
+                        *ngIf="f['email'].invalid && (f['email'].dirty || f['email'].touched)">
+                        <div *ngIf="f['email'].errors?.['required']">Email is required</div>
+                        <div *ngIf="f['email'].errors?.['pattern']">
+                            Email format is invalid
+                        </div>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col">
+                        <label for="password" class="form-label">Password</label>
+                        <div class="input-group">
+                            <input type="password" class="form-control" id="password" formControlName="password" />
+                            <div class="alert alert-danger"
+                            *ngIf="f['password'].invalid && (f['password'].dirty || f['password'].touched)">
+                            <div *ngIf="f['password'].errors?.['required']">Email is required</div>
+                            <div *ngIf="f['password'].errors?.['minlength']">Password should have at least
+                                8 characters</div>
+                            <div *ngIf="f['password'].errors?.['pattern']">
+                                    Password must have digits, special characters, big and small letters
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group col">
+                        <label for="confirmPassword" class="form-label">Confirm Password</label>
+                        <div class="input-group">
+                            <input type="password" class="form-control" id="confirmPassword" formControlName="confirmPassword" />
+                            <div class="alert alert-danger"
+                            *ngIf="f['confirmPassword'].invalid && (f['confirmPassword'].dirty || f['confirmPassword'].touched)">
+                            <div *ngIf="f['confirmPassword'].errors?.['required']">Email is required</div>
+                            <div *ngIf="f['confirmPassword'].errors?.['mustMatch']">Passwords must match</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group form-check">
+            <input type="checkbox" formControlName="acceptTerms" id="acceptTerms" class="form-check-input" />
+            <label for="acceptTerms" class="form-check-label">Accept Terms & Conditions</label>
+            <div *ngIf="submitted && f['acceptTerms'].errors" class="invalid-feedback">Accept Ts & Cs is required</div>
+            </div>
+
+                <div class="form-group">
+                    <button [disabled]="!registerForm.valid" class="btn btn-primary">
+                        <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                        Register
+                    </button>
+                    <a routerLink="../login" href="" class="btn btn-link">Cancel</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

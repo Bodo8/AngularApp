@@ -1,0 +1,72 @@
+<form #editAspecyForm="ngForm" (ngSubmit)="updateAspect(editAspecyForm)">
+    <table class="table">
+        <thead>
+            <tr>
+                <th class="col-10"></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <ul class="list-group">
+                        <li class="list-group-item">
+                            <strong>{{ aspectSignDto.planetFirst}} :</strong>
+                            <strong>{{ aspectSignDto.planetSecond}}. </strong>
+                            <select required type="string" class="form-select" aria-label="aspectName"
+                                    id="aspectName" [(ngModel)]="aspectName" name="aspectName" #aspectNameSelect
+                                    #aspectNameModel="ngModel">
+                                    <option class="" disabled selected value="undefined">Wybierz z listy..
+                                    </option>
+                                    <option *ngFor="let aspect of aspectNames" [ngValue]="aspect">{{ aspect }}
+                                    </option>
+                                </select>
+                                <div class="alert alert-danger"
+                                *ngIf="aspectNameModel.invalid && ( aspectNameModel.touched || aspectNameModel.dirty)">
+                                <div *ngIf="aspectNameModel.errors.required">
+                                </div>Pole jest wymagane
+                            </div>
+                        </li>
+                        <li class="list-group-item">
+                            <select required type="string" class="form-select" aria-label="positiveType"
+                                    id="positiveType" [(ngModel)]="positiveType" name="positiveType"
+                                    #positiveTypeSelect #positiveTypeModel="ngModel">
+                                    <option class="" disabled selected value="undefined">Wybierz z listy..
+                                    </option>
+                                    <option [ngValue]="true">TAK</option>
+                                    <option [ngValue]="false">NIE</option>
+                                </select>
+                                <div class="alert alert-danger"
+                                    *ngIf="positiveTypeModel.invalid && ( positiveTypeModel.touched || positiveTypeModel.dirty)">
+                                    <div *ngIf="positiveTypeModel.errors.required">
+                                    </div>Pole jest wymagane
+                                </div>
+                            <strong>{{ aspectSignDto.positiveType}}</strong>
+                        
+                        </li>
+                    </ul>
+                    <ul class="list-group">
+                        <li class="list-group-item">
+                            <div class="col-9" id="columnDescription">
+                                <label for="descriptionAspect" class="form-label">Opis aspektu dwu planet
+                                    zodiaku</label>
+                                <textarea required type="string" class="form-control" id="descriptionAspect"
+                                    rows="8" [(ngModel)]="descriptionAspect" name="descriptionAspect"
+                                    #descriptionAspectModel="ngModel"></textarea>
+                                <div class="alert alert-danger"
+                                    *ngIf="descriptionAspectModel.invalid && ( descriptionAspectModel.touched || descriptionAspectModel.dirty)">
+                                    <div *ngIf="descriptionAspectModel.errors.required">
+                                    </div>Pole jest wymagane
+                                </div>
+                            </div>
+                            
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <button type="button" class="btn btn-default" [disabled]="!editAspecyForm.dirty"
+                                (click)="editAspecyForm.resetForm()">Resetuj</button>
+                            <button type="submit" class="btn btn-success"
+                                [disabled]="!editAspecyForm.form.valid">Zmień</button>
+</form>

@@ -1,0 +1,8 @@
+<div class="app-container" [ngClass]="{ 'bg-light': account }">
+    <div class="container-fluid" *ngIf="account">
+        <app-navbar></app-navbar>
+    </div>
+    <div class="container-fluid">
+        <router-outlet></router-outlet>
+    </div>
+</div>

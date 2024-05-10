@@ -1,0 +1,141 @@
+<div class="container-fluid">
+    <div class="titleSite" id="titleSite">
+        <h1><strong>Podgląd posiadanych horoskopów</strong></h1>
+    </div>
+</div>
+<!-- <ng-container *ngIf="isParameters; then haveParameters  else noParameters">
+    </ng-container>
+        <ng-template #haveParameters> -->
+<div class="panel-body">
+    <table class="table">
+        <thead>
+            <tr>
+                <th class="col-10"><strong>Planety w znakach i aspekty wzajemne planet</strong></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr> </tr>
+        </tbody>
+    </table>
+    <div *ngIf="horoscopeParameters">
+        <ul class="list-group" *ngFor="let parameter of horoscopeParameters" id="signDescr">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th class="col-10"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <ul class="list-group">
+                                <li class="list-group-item">
+                                    <h4><strong>Właściciel horoskopu: {{ parameter.horoscopeOwner}}.</strong></h4>
+                                    <strong>Data urodzin: {{ parameter.birthOfDate | date : "EEEE YYYY-MM-dd hh:mm a"
+                                        }} Czas GMT. </strong>
+                                    <strong> Miejsce urodzin: {{ parameter.placeBirth }}.</strong>
+                                    <strong style="margin-left: 30px;">Opis: </strong>
+                                    <span class="badge rounded-pill text-bg-light" style="margin-left: 5px;"
+                                        (click)="showHoroscopeDescription(parameter.horoscopeId)"><img
+                                            src="{{ iconEyePath }}" alt="Eye Icon"></span>
+                                    <strong style="margin-left: 30px;">Parametry: </strong>
+                                    <span class="badge rounded-pill text-bg-light" style="margin-left: 5px;"
+                                        (click)="showPlanetsList()"><img src="{{ iconEyePath }}" alt="Eye Icon"></span>
+
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </ul>
+
+        <table class="table">
+            <thead>
+                <tr>
+                    <th class="col-10"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <ng-container *ngIf="showPlanets; then havePlanets">
+                        </ng-container>
+                        <ng-template #havePlanets>
+                            <ul class="list-group" *ngFor="let itemPlanet of parameter.planetsHoroscope" id="planets">
+                                <li class="list-group-item">
+                                    <strong>Planeta: {{ itemPlanet.planetName}} </strong>
+                                    <strong>w znaku: {{ itemPlanet.zodiacName}}</strong>
+                                    <strong>, planeta w domu: {{ itemPlanet.houseNumber}}</strong>
+                                    <div> czy ruch wsteczny planety: <strong>{{ itemPlanet.isRetrogradation}}</strong>
+                                    </div>
+                                    <strong> dokładny stopień: {{ itemPlanet.placeDegree}}</strong>
+                                </li>
+                            </ul>
+                        </ng-template>
+
+                        <!-- niżej -->
+
+                        <ng-container *ngIf="showHoroscope; then haveHoroscope">
+                        </ng-container>
+                        <ng-template #haveHoroscope>
+                            <div *ngIf="horoscopeDescription">
+                                <ul class="list-group">
+                                    <li class="list-group-item" style="background-color: aquamarine;">
+                                        <h4><strong>Właściciel horoskopu: {{
+                                                horoscopeDescription.horoscopeOwner}}.</strong></h4>
+                                        <strong>Data urodzin: {{ horoscopeDescription.birthOfDate}}.</strong>
+                                        <strong>, Miejsce urodzin: {{ horoscopeDescription.placeBirth}}.</strong>
+                                    </li>
+                                </ul>
+                                <ul class="list-group" *ngFor="let item of horoscopeDescription.planetsHoroscope"
+                                    id="planets">
+                                    <li class="list-group-item">
+                                        <strong>Planeta: {{ item.planetName}} </strong>
+                                        <strong>, położenie {{ item.placeDegree}} </strong>
+                                        <strong>, w znaku: {{ item.signZodiacDto.zodiacName}}</strong>
+                                        <div> czy ruch wsteczny planety? <strong>{{ item.isRetrogradation}}</strong>
+                                        </div>
+                                        <strong>Opis planet w znaku zodiaku : </strong>
+                                        <div> {{ item.signZodiacDto.description}} </div>
+                                        <div *ngIf="item.signZodiacDto.positionInSign">
+                                        <strong>Opis części zodiaku: {{
+                                            item.signZodiacDto.positionInSign.descriptionPosition}}</strong>
+                                        </div>
+                                        <div *ngIf="item.houseDto">
+                                        <strong>Planeta w domu {{item.houseDto.numberHouse}}: </strong>
+                                        <div>Opis: {{item.houseDto.description}} </div>
+                                    </div>
+                                        <div *ngIf="item.signZodiacDto.exactPositions">
+                                            <strong> dokładny stopień: {{ item.signZodiacDto.exactPositions.exactDegree
+                                                }}</strong>
+                                            <strong> . {{ item.signZodiacDto.exactPositions.ExactDescription
+                                                }}</strong>
+                                        </div>
+                                    </li>
+                                </ul>
+
+                                <ul class="list-group" *ngFor="let item of horoscopeDescription.aspectsHoroscope"
+                                    id="planets">
+                                    <li class="list-group-item">
+                                        <strong>Planeta: {{ item.planetFirst}} </strong>
+                                        <strong> aspekt: {{ item.aspectName}} </strong>
+                                        <strong> do: {{ item.planetSecond}}</strong>
+                                        <strong>, czy aspekt pozytywny? {{ item.positiveType}}.</strong>
+                                        <div><strong>Opis aspektu : </strong></div><div> {{ item.description }}</div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </ng-template>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+</div>
+<!-- </ng-template> -->
+
+<ng-template #noParameters>
+    <h1><strong>Nie masz jeszcze zdefiniowanych horoskopów</strong></h1>
+</ng-template>

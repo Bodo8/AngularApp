@@ -1,0 +1,102 @@
+<div class="col-10">
+    <div class="panel-body">
+        <h3>Planets in signs</h3>
+        <div class="col">
+            
+                <h2><strong *ngIf="planetStorageVm$ | async as planetStorageVm">{{
+                        planetStorageVm.planetInSignsDtos[0].planetName }}</strong></h2>
+                <div class="panel-body">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th class="col-4">Znaczenie planety w znakach zodiaku</th>
+                                <th class="col-3">Znaczenie planety w domu</th>
+                                <th class="col-3">Pozycja planety w znaku</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr> </tr>
+                        </tbody>
+                    </table>
+
+                    <div *ngIf="planetStorageVm$ | async as planetStorageVm">
+                        <ul *ngFor="let signs of planetStorageVm.planetInSignsDtos">
+                            <ul class="list-group" *ngFor="let itemPlanet of signs.signZodiacsStore"id="signDescr">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th class="col-4"></th>
+                                        <th class="col-3"></th>
+                                        <th class="col-3"></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <ul class="list-group">
+                                                <li class="list-group-item">
+                                                    <strong>{{ itemPlanet.zodiacName}}:</strong>
+                                                    <ng-container
+                                                        *ngIf="showDescription; then visibleDescription else noDescription">
+                                                    </ng-container>
+                                                    <ng-template #visibleDescription>{{
+                                                        itemPlanet.description }}
+                                                    </ng-template>
+                                                </li>
+                                            </ul>
+                                            <ul class="list-group"
+                                                *ngFor="let exactPosition of itemPlanet.exactPositions">
+                                                <li class="list-group-item">
+                                                    <strong>{{ exactPosition.exactDegree }}:</strong>
+                                                    <ng-container
+                                                        *ngIf="showDescription; then visibleDescription else noDescription">
+                                                    </ng-container>
+                                                    <ng-template #visibleDescription> {{
+                                                        exactPosition.exactDescription
+                                                        }}</ng-template>
+                                                </li>
+                                            </ul>
+
+                                            <div class="form-check">
+                                                <label><input class="form-check-input" type="checkbox"
+                                                        [(ngModel)]="showDescription"> Pokaż
+                                                    Opisy</label>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <ul class="list-group" *ngFor="let house of itemPlanet.housesStorage">
+                                                <li class="list-group-item">
+                                                    <strong>{{ house.numberHouse }}:</strong>
+                                                    <ng-container
+                                                        *ngIf="showDescription; then visibleDescription else noDescription">
+                                                    </ng-container>
+                                                    <ng-template #visibleDescription> {{
+                                                        house.description
+                                                        }}</ng-template>
+                                                </li>
+                                            </ul>
+                                            
+                                        </td>
+                                        <td>
+                                            <ul class="list-group-item"
+                                                *ngFor="let position of itemPlanet.positionInSign">
+                                                <ng-container
+                                                    *ngIf="showDescription; then visibleDescription else noDescription">
+                                                </ng-container>
+                                                <ng-template #visibleDescription>
+                                                    <li class="list-group-item">
+                                                        {{ position.descriptionPosition }}<br>
+                                                    </li>
+                                                </ng-template>
+                                            </ul>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </ul>
+                    </ul>
+                    </div>
+                </div>
+        </div>
+    </div>
+</div>

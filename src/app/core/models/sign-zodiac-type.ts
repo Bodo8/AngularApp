@@ -1,0 +1,15 @@
+
+export enum SignZodiacType{
+    ARIES = 'ARIES',
+    TAURUS = 'TAURUS',
+    GEMINI = 'GEMINI',
+    CANCER = 'CANCER',
+    LION = 'LION',
+    VIRGO = 'VIRGO',
+    LIBRA = 'LIBRA',
+    SCORPION = 'SCORPION',
+    SAGITARIUS = 'SAGITARIUS',
+    CAPRICORN = 'CAPRICORN',
+    AQUARIUS = 'AQUARIUS',
+    FISHES = 'FISHES'
+}

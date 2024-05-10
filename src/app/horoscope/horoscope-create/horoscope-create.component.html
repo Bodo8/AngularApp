@@ -1,0 +1,317 @@
+<nav class="navbar bg-body-tertiary">
+    <h1>Create Horoscope </h1>
+</nav>
+<nav class="navbar bg-body-tertiary"></nav>
+
+<form #addBirth="ngForm" (ngSubmit)="addHoroscope(addBirth)">
+
+    <div class="form-row">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th class="col-4">
+                        <h6><strong>Enter your date and time of birth</strong></h6>
+                    </th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th class="col-4">
+                        <mat-form-field>
+                            <input matInput [matDatepicker]="datepicker" placeholder="Choose a date of bitrh" id="dateBirth"
+                                [(ngModel)]="dateBirth" required name="dateBirth" #dateBirthModel="ngModel">
+                            <mat-datepicker-toggle matSuffix [for]="datepicker"></mat-datepicker-toggle>
+                            <mat-datepicker #datepicker></mat-datepicker>
+                        </mat-form-field>
+                        <div class="alert alert-danger"
+                *ngIf="dateBirthModel.invalid && ( dateBirthModel.touched || dateBirthModel.dirty)">
+                <div *ngIf="dateBirthModel.errors.required">Date of birth is required</div>
+            </div>
+                        <mat-form-field class="mt-3">
+                            <input matInput [ngxMatTimepicker]="timepicker" [format]="24" placeholder="Choose a time" id="selectedTime"
+                                [(ngModel)]="selectedTime" required name="selectedTime" #selectedTimeModel="ngModel">
+                            <ngx-mat-timepicker-toggle matSuffix [for]="timepicker"></ngx-mat-timepicker-toggle>
+                            <ngx-mat-timepicker #timepicker></ngx-mat-timepicker>
+                        </mat-form-field>
+                        <div class="alert alert-danger"
+                *ngIf="selectedTimeModel.invalid && ( selectedTimeModel.touched || selectedTimeModel.dirty)">
+                <div *ngIf="selectedTimeModel.errors.required">Time of birth is required</div>
+            </div>
+                    </th>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="form-row">
+        <div class="form-group col-4">
+            <label for="horoscopeOwner"><strong> Horoscope Owner</strong></label>
+            <input class="form-control form-control-sm" required type="text" id="horoscopeOwner"
+                [(ngModel)]="horoscopeOwner" name="horoscopeOwner" #horoscopeOwnerModel="ngModel">
+            <div class="alert alert-danger"
+                *ngIf="horoscopeOwnerModel.invalid && ( horoscopeOwnerModel.touched || horoscopeOwnerModel.dirty)">
+                <div *ngIf="horoscopeOwnerModel.errors.required">Horoscope Owner is required</div>
+            </div>
+        </div>
+        <div class="form-group col-4">
+            <label for="birthPlace"><strong> Birth place</strong></label>
+            <input class="form-control form-control-sm" required type="text" id="birthPlace" [(ngModel)]="birthPlace"
+                name="birthPlace" #birthPlaceModel="ngModel">
+            <div class="alert alert-danger"
+                *ngIf="birthPlaceModel.invalid && ( birthPlaceModel.touched || birthPlaceModel.dirty)">
+                <div *ngIf="birthPlaceModel.errors.required">Birth place is required</div>
+            </div>
+        </div>
+    </div>
+
+    <button type="submit" class="btn btn-success"
+        [disabled]="!addBirth.form.valid || !isAnyAspectParameters || !isAnyPlanetParameter">Add Horoscope</button>
+</form>
+<nav class="navbar bg-body-tertiary"></nav>
+<table class="table">
+    <thead>
+        <tr>
+            <th class="col-2">
+                <h3><strong>Create query aspects</strong></h3>
+            </th>
+            <th class="col-3">
+                <h3><strong>Added aspects</strong></h3>
+            </th>
+            <th class="col-2">
+                <h3><strong>Create query planets</strong></h3>
+            </th>
+            <th class="col-3">
+                <h3><strong>Added planets</strong></h3>
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <th>
+                <form #addAspectForm="ngForm" (ngSubmit)="addAspects(addAspectForm)">
+                    <div class="form-row">
+                        <div class="form-group col-10">
+                            <div class="form-group">
+                                <label for="planetFirst">Planet First</label>
+                                <select required type="text" class="form-select" id="planetFirst" name="planetFirst"
+                                    [(ngModel)]="planetFirst" #planetFirstModel="ngModel">
+                                    <option *ngFor="let planetFirst of planetTypes" [ngValue]="planetFirst">
+                                        {{planetFirst}}</option>
+                                </select>
+                                <div class="alert alert-danger"
+                                    *ngIf="planetFirstModel.invalid && (planetFirstModel.dirty || planetFirstModel.touched)">
+                                    <div *ngIf="planetFirstModel.errors?.required">Planet name is required</div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="aspectName">Aspect Name</label>
+                                <select required type="text" class="form-select" id="aspectName" name="aspectName"
+                                    [(ngModel)]="selectedAspectName" #aspectNameModel="ngModel">
+                                    <option *ngFor="let aspectName of aspectTypes" [ngValue]="aspectName">
+                                        {{aspectName}}
+                                    </option>
+                                </select>
+                                <div class="alert alert-danger"
+                                    *ngIf="aspectNameModel.invalid && (aspectNameModel.dirty || aspectNameModel.touched)">
+                                    <div *ngIf="aspectNameModel.errors?.required">Aspect name is required</div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="planetSecond">Planet Second</label>
+                                <select required type="text" class="form-select" id="planetSecond" name="planetSecond"
+                                    [(ngModel)]="planetSecond" #planetSecondModel="ngModel">
+                                    <option *ngFor="let planetSecond of planetTypes" [ngValue]="planetSecond">
+                                        {{planetSecond}}</option>
+                                </select>
+                                <div class="alert alert-danger"
+                                    *ngIf="planetSecondModel.invalid && (planetSecondModel.dirty || planetSecondModel.touched)">
+                                    <div *ngIf="planetSecondModel.errors?.required">Planet name is required</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <button type="submit" [disabled]="!addAspectForm.valid" class="btn btn-success">
+                                Add Aspect to list </button>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <button [disabled]="!isAnyAspectParameters" class="btn btn-primary"
+                                (click)="getPlanetAspects()">
+                                <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                                Show aspects descriptions </button>
+                        </div>
+                    </div>
+                </form>
+            </th>
+            <th>
+                <div *ngIf="isAnyAspectParameters">
+                    <ul class="list-group" *ngFor="let parameter of aspectParameters" id="signDescr">
+                        <ul class="list-group">
+                            <li class="list-group-item">
+                                <strong>{{ parameter.planetFirst}} :</strong>
+                                <strong>{{ parameter.aspectName}} :</strong>
+                                <strong>{{ parameter.planetSecond}}. </strong>
+                            </li>
+                        </ul>
+                    </ul>
+                </div>
+            </th>
+
+            <th>
+                <form #addPlanetForm="ngForm" (ngSubmit)="addPlanet(addPlanetForm)">
+                    <div class="form-row">
+                        <div class="form-group col-10">
+                            <div class="form-group">
+                                <label for="planetName">Planet Name</label>
+                                <select required type="text" class="form-select" id="planetName" name="planetName"
+                                    [(ngModel)]="selectedPlanetName" #planetNameModel="ngModel">
+                                    <option *ngFor="let planetName of planetSignTypes" [ngValue]="planetName">
+                                        {{planetName}}</option>
+                                </select>
+                                <div class="alert alert-danger"
+                                    *ngIf="planetNameModel.invalid && (planetNameModel.dirty || planetNameModel.touched)">
+                                    <div *ngIf="planetNameModel.errors?.required">Planet name is required</div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="signName">Sign Name</label>
+                                <select required type="text" class="form-select" id="signName" name="signName"
+                                    [(ngModel)]="selectedSign" #signNameModel="ngModel">
+                                    <option *ngFor="let signName of signTypes" [ngValue]="signName">{{signName}}
+                                    </option>
+                                </select>
+                                <div class="alert alert-danger"
+                                    *ngIf="signNameModel.invalid && (signNameModel.dirty || signNameModel.touched)">
+                                    <div *ngIf="signNameModel.errors?.required">Sign name is required</div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="numberDegree">Position planet</label>
+                                <select required type="text" class="form-select" id="numberDegree" name="numberDegree"
+                                    [(ngModel)]="numberDegree" #numberDegreeModel="ngModel">
+                                    <option *ngFor="let numberDegree of numberToSelect" [ngValue]="numberDegree">
+                                        {{numberDegree}}</option>
+                                </select>
+                                <div class="alert alert-danger"
+                                    *ngIf="numberDegreeModel.invalid && (numberDegreeModel.dirty || numberDegreeModel.touched)">
+                                    <div *ngIf="numberDegreeModel.errors?.required">Position planet is required
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="houseName">House name</label>
+                                <select required type="text" class="form-select" id="houseName" name="houseName"
+                                    [(ngModel)]="selectedHouse" #houseNameModel="ngModel">
+                                    <option *ngFor="let houseName of houseTypes" [ngValue]="houseName">{{houseName}}
+                                    </option>
+                                </select>
+                                <div class="alert alert-danger"
+                                    *ngIf="houseNameModel.invalid && (houseNameModel.dirty || houseNameModel.touched)">
+                                    <div *ngIf="houseNameModel.errors?.required">House name is required</div>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="isRetrograde">Is planet retrograding</label>
+                                <select class="form-select" id="isRetrograde" name="isRetrograde"
+                                    [(ngModel)]="isRetrograde" #isRetrogradeModel="ngModel">
+                                    <option value="No" selected>No</option>
+                                    <option value="Yes">Yes</option>
+                                </select>
+
+                                <div class="alert alert-danger" *ngIf="isRetrogradeModel.invalid">
+                                    <div *ngIf="isRetrogradeModel.errors?.required">Retrograde is required</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <button type="submit" [disabled]="!addPlanetForm.valid" class="btn btn-success">
+                                Add planet to list </button>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group">
+                            <button [disabled]="!isAnyPlanetParameter" class="btn btn-primary"
+                                (click)="getPlanetInSigns()">
+                                <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                                Show planet in sign </button>
+                        </div>
+                    </div>
+                </form>
+            </th>
+            <th>
+                <div *ngIf="isAnyPlanetParameter">
+                    <ul class="list-group" *ngFor="let parameter of planetParameters" id="signDescr">
+                        <ul class="list-group">
+                            <li class="list-group-item">
+                                <strong>{{ parameter.planetName}} :</strong>
+                                <strong>{{ parameter.zodiacName}} :</strong>
+                                <strong>{{ parameter.placeDegree}}. </strong>
+                                <strong>{{ parameter.houseNumber}} :</strong>
+                                <strong>{{ parameter.isRetrogradation}} :</strong>
+                            </li>
+                        </ul>
+                    </ul>
+                </div>
+            </th>
+        </tr>
+    </tbody>
+</table>
+
+<div *ngIf="aspectStorageVm && showAspects">
+    <div class="col-10">
+        <div>
+            <div class="panel-body">
+
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>
+                                <h3>Planets and aspects</h3>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <div *ngIf="aspectStorageVm">
+                            <ul class="list-group" *ngFor="let itemAspect of aspectStorageVm.aspectStorage"
+                                id="signDescr">
+                                <tr>
+                                    <td>
+                                        <ul class="list-group">
+                                            <li class="list-group-item">
+                                                <strong>{{ itemAspect.planetFirst}} :</strong>
+                                                <strong>{{ itemAspect.aspectName}} :</strong>
+                                                <strong>{{ itemAspect.planetSecond}}. </strong>
+                                                <div>Characteristics of the aspect - positive:
+                                                    <strong>{{ itemAspect.positiveType}}</strong>
+                                                </div>
+                                            </li>
+                                        </ul>
+                                        <ul class="list-group">
+                                            <li class="list-group-item">
+                                                {{ itemAspect.description }}
+                                            </li>
+                                        </ul>
+                                    </td>
+                                </tr>
+                            </ul>
+                        </div>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ng-container *ngIf="showPlanets then visibleListPlanets">
+</ng-container>
+<ng-template #visibleListPlanets>
+    <div class="container-fluid pt-3">
+        <hor-horoscope-planet-in-signs [planetStorageVm$]="planetStorageVm$">
+        </hor-horoscope-planet-in-signs>
+    </div>
+</ng-template>

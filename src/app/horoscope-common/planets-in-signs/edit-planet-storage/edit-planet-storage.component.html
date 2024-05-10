@@ -1,0 +1,100 @@
+<form #editSignForm="ngForm" (ngSubmit)="updateSignPlanet(editSignForm)">
+    <table class="table">
+        <thead>
+            <tr>
+                <th class="col-4"></th>
+                <th class="col-3"></th>
+                <th class="col-3"></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <div>
+                        <label for="signDescription" class="form-label"><strong> {{ planetStorageIn.planetName }} w:
+                                {{ planetStorageIn.signZodiacStorageDto.zodiacName }}</strong></label>
+                        <textarea required type="string" class="form-control" id="signDescription" rows="8"
+                            [(ngModel)]="planetStorageIn.signZodiacStorageDto.description" name="signDescription"
+                            #signDescriptionModel="ngModel"></textarea>
+                        <div class="alert alert-danger"
+                            *ngIf="signDescriptionModel.invalid && ( signDescriptionModel.touched || signDescriptionModel.dirty)">
+                            <div *ngIf="signDescriptionModel.errors.required">Pole jest wymagane</div>
+                        </div>
+                    </div>
+
+                    <ul class="list-group"
+                        *ngFor="let exact of planetStorageIn.signZodiacStorageDto.exactPositions; index as i">
+                        <li class="list-group-item">
+                            <label for="exactDegree_{{i}}" class="form-label"><strong>Dokładny stopień
+                                    znaku</strong></label>
+                            <input class="form-control" required type="number" placeholder="Liczba"
+                                id="exactDegree_{{i}}" [(ngModel)]="exact.exactDegree" name="exactDegree_{{i}}"
+                                #exactDegreeModel="ngModel">
+                            <div class="alert alert-danger"
+                                *ngIf="exactDegreeModel.invalid && ( exactDegreeModel.touched || exactDegreeModel.dirty)">
+                                <div *ngIf="exactDegreeModel.errors.required">
+                                </div>Pole jest wymagane
+                            </div>
+                            <label for="exactPosition_{{i}}" class="form-label"><strong>Dokładny stopień
+                                    opis</strong></label>
+                            <textarea required type="string" class="form-control" id="exactPosition_{{i}}" rows="5"
+                                [(ngModel)]="exact.exactDescription" name="exactPosition_{{i}}"
+                                #exactPositionModel="ngModel">
+                                    </textarea>
+                            <div class="alert alert-danger"
+                                *ngIf="exactPositionModel.invalid && ( exactPositionModel.touched || exactPositionModel.dirty)">
+                                <div *ngIf="exactPositionModel.errors.required">Pole jest wymagane</div>
+                            </div>
+                        </li>
+                    </ul>
+
+                </td>
+                <td>
+                    <ul class="list-group" *ngFor="let house of planetStorageIn.housesStorage; index as i">
+                        <li class="list-group-item">
+                            <label for="signHouse_{{i}}" class="form-label"><strong>Domy</strong></label>
+                            <div><strong>{{planetStorageIn.planetName}} w
+                                    {{house.numberHouse}} domu
+                                </strong></div>
+                            <textarea required type="string" class="form-control" id="signHouse_{{i}}" rows="16"
+                                [(ngModel)]="house.description" name="signHouse_{{i}}" #signHouseModel="ngModel">
+                                </textarea>
+                            <div class="alert alert-danger"
+                                *ngIf="signHouseModel.invalid && ( signHouseModel.touched || signHouseModel.dirty)">
+                                <div *ngIf="signHouseModel.errors.required">Pole jest wymagane</div>
+                            </div>
+                        </li>
+                    </ul>
+                </td>
+                <td>
+                    <ul class="list-group"
+                        *ngFor="let position of planetStorageIn.signZodiacStorageDto.positionInSign;  index as i">
+                        <div>
+                            <textarea required type="number" class="form-control" id="degreeStart_{{i}}" rows="1"
+                                name="degreeStart_{{i}}" [(ngModel)]="position.degreeStart"></textarea>
+                            <textarea required type="number" class="form-control" id="degreeEnd_{{i}}" rows="1"
+                                name="degreeEnd_{{i}}" [(ngModel)]="position.degreeEnd"></textarea>
+
+                            <textarea required type="string" class="form-control" id="signPosition_{{i}}" rows="8"
+                                [(ngModel)]="position.descriptionPosition" name="signPosition_{{i}}"
+                                #signPositionModel="ngModel">
+                                </textarea>
+                            <div class="alert alert-danger"
+                                *ngIf="signPositionModel.invalid && ( signPositionModel.touched || signPositionModel.dirty)">
+                                <div *ngIf="signPositionModel.errors.required">Pole jest wymagane</div>
+                            </div>
+                        </div>
+                    </ul>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+        <div class="btn-group me-2" role="group" aria-label="First group">
+            <button class="btn btn-danger" type="button" (click)="cancelEdit()">Cancel</button>
+        </div>
+         <div class="btn-group me-2" role="group" aria-label="Second group">
+            <button class="btn btn-success" type="submit" [disabled]="!editSignForm.form.valid">Aktualizuj</button>
+        </div>
+    </div>
+</form>

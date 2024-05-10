@@ -1,0 +1,78 @@
+<div class="container-fluid">
+    <div class="titleSite">
+        <h1><strong>Dodawanie i edycja opisów planet i aspektów</strong></h1>
+    </div>
+    <div class="container-fluid">
+        <ng-container *ngIf="showCreatePlanet; then visiblePlanet  else noVisiblePlanet">
+        </ng-container>
+        <ng-template #noVisiblePlanet>
+            <div class="accordion-item">
+            <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" id="accordionPlanet"
+                    aria-expanded="false" aria-controls="collapseOne" (click)="showCreatePlanets()">
+                    <strong>Add planets</strong>
+                </button>
+            </h2>
+        </div>
+        </ng-template>
+        <ng-template #visiblePlanet>
+            <div class="container-fluid pt-3">
+                <hor-create-planet-storage (hidePlanetEmitter)="hideCreatePlanets($event)">
+                </hor-create-planet-storage>
+            </div>
+        </ng-template>
+
+        <ng-container *ngIf="showCreateAspect; then visibleCreateAspect  else noVisibleCreateAspect">
+        </ng-container>
+        <ng-template #noVisibleCreateAspect>
+            <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" id="accordionAspect"
+                    aria-expanded="false" aria-controls="collapseOne" (click)="showCreateAspects()">
+                    <strong>Add aspects</strong>
+                </button>
+            </h2>
+        </ng-template>
+        <ng-template #visibleCreateAspect>
+            <div class="container-fluid pt-3">
+                <hor-create-aspect-storage (hideEmitter)="hideCreateAspects($event)">
+                </hor-create-aspect-storage>
+            </div>
+        </ng-template>
+
+
+        <ng-container *ngIf="showShowAspect; then visibleShowAspect  else noVisibleShowAspect">
+        </ng-container>
+        <ng-template #noVisibleShowAspect>
+            <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                    id="accordionShowAspect" aria-expanded="false" aria-controls="collapseOne"
+                    (click)="showShowAspects()"><strong>Show aspects</strong>
+                </button>
+            </h2>
+        </ng-template>
+        <ng-template #visibleShowAspect>
+            <div class="container-fluid pt-3">
+                <hor-app-show-aspect-storage (hideAspectEmitter)="hideShowAspects($event)">
+                </hor-app-show-aspect-storage>
+            </div>
+        </ng-template>
+
+        <ng-container *ngIf="showListPlanets; then visibleListPlanets  else noVisibleListPlanets">
+        </ng-container>
+        <ng-template #noVisibleListPlanets>
+            <h2 class="accordion-header">
+                <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+                    id="accordionListPlanets" aria-expanded="false" aria-controls="collapseOne"
+                    (click)="showListPlanet()"><strong>Show planets in zodiac signs</strong>
+                </button>
+            </h2>
+        </ng-template>
+        <ng-template #visibleListPlanets>
+            <div class="container-fluid pt-3">
+                 <hor-planets-in-signs (hidePlanetsEmitter)="hideListPlanet($event)">
+                </hor-planets-in-signs> 
+            </div>
+        </ng-template>
+    </div>
+
+</div>

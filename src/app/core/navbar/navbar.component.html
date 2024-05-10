@@ -1,0 +1,41 @@
+<nav class="navbar navbar-expand-lg" id="navbarmain">
+  <div class="container-fluid">
+    <div class="collapse navbar-collapse">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li routerLinkActive="active" class="nav-item">
+          <button routerLink="home" routerLinkActive="active" class="btn btn-outline-warning me-md-1">Home</button>
+        </li>
+        <li routerLinkActive="active" class="nav-item">
+          <button routerLink="horoscope-home" routerLinkActive="active" class="btn btn-outline-warning me-md-1">Horoscops
+          </button>
+        </li>
+        <li routerLinkActive="active" class="nav-item">
+          <button routerLink="horoscope-storage" routerLinkActive="active" class="btn btn-outline-warning me-md-1">
+            Horoscope Storage</button>
+        </li>
+        <li routerLinkActive="active" class="nav-item">
+          <button routerLink="horoscope-create" routerLinkActive="active" class="btn btn-outline-warning me-md-1">Create Horoscops
+          </button>
+        </li>
+      </ul>
+      <ul class="navbar-nav me-end mb-2 mb-lg-0">
+        <li>
+        <ng-container *ngIf="account; then visiblePlanet  else noVisiblePlanet">
+        </ng-container>
+        <ng-template #noVisiblePlanet>
+            
+        </ng-template>
+        <ng-template #visiblePlanet>
+          <button routerLink="profile" routerLinkActive="active" class="btn btn-outline-warning me-md-1">
+            Profil</button>
+            <button *ngIf="account.role === Role.Admin" routerLink="/admin" routerLinkActive="active" 
+            class="btn btn-outline-warning me-md-1">Admin</button>
+          <button type="button" class="btn btn-outline-warning me-md-2" (click)="logout()"
+            >Wyloguj
+          </button>
+        </ng-template>
+      </li>
+      </ul>
+    </div>
+  </div>
+</nav>
